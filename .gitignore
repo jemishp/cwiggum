@@ -2,6 +2,7 @@
 .happypack
 .idea
 .nyc_output
+/build
 /nginx/conf/includes/ui.conf
 /config/local.json
 /dist/*
