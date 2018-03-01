@@ -12,8 +12,8 @@ export default function App(props) {
 
     const { pokemon } = props;
     return (
-        <div>
-            Chief Wiggum is alive with routes and data! 
+        <div id="myData">
+            Chief Wiggum is alive with routes and data!
             <Switch>
                 <Route path="/" exact component={Home} /> 
                 <Route path="/pokemon" exact render={() => (<Redirect to="/pokemon/ability/telepathy" />)} />

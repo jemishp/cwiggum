@@ -1,5 +1,5 @@
 export default function renderFullPage(html, preloadedState) {
-    var now = new Date();
+
     return `
         <!doctype html>
         <html>
