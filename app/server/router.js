@@ -7,7 +7,10 @@ import renderFullPage from './renderFullPage';
 import getPokemon from '../services/getPokemon';
 import App from '../components/App';
 
-export default function router(req, res) {
+var express=require('express');
+
+var router = express.Router();
+router.use(function(req, res) {
 
     const match = routes.reduce((acc, route) => matchPath(req.url, { path: route, exact: true }) || acc, null);
     if (!match) {
@@ -30,4 +33,6 @@ export default function router(req, res) {
             res.status(200).send(renderFullPage(html, pokemon));
         })
         .catch(err => res.status(404).send(`${err}: Oh No! I cannot find the telepathic pokemon... maybe they knew we were coming!`));
-};
+});
+
+export default router;
