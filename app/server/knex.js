@@ -5,9 +5,12 @@ var pg = require('knex')({
         host : '127.0.0.1',
         user : 'postgres',
         password : 'password',
-        database : 'applogs_test'
+        database : 'appLogs',
+        charset: 'utf8',
+        port: 5432,
+        timezone: 'UTC',
     },
-    searchPath: ['knex', 'public'],
+    searchPath: ['applogs', 'public'],
 });
 
 module.exports = pg;

@@ -53,7 +53,7 @@
     "jasmine2-custom-message": "^0.8.4",
     "node-sass": "^4.7.2",
     "nodeman": "^1.1.2",
-    "nodemon": "^1.17.1",
+    "nodemon": "^1.17.2",
     "parallelshell": "^3.0.2",
     "pivotal-js-jasmine-matchers": "^0.1.1",
     "pivotal-js-react-test-helpers": "^0.1.0",

@@ -1,58 +1,72 @@
 import appLogsSchema from '../models/appLogsModel';
 var Log = appLogsSchema;
-exports.list_all_logs = function(req, res) {
-    Log.find({}, function(err, log) {
-        if (err)
-            res.send(err);
-        res.json(log);
+import pg from '../../server/knex';
 
-    });
+exports.list_all_logs = function(req, res) {
+    var log = {log: ''};
+    pg.select().table('appLogs')
+        .then(function (collection) {
+            res.json({
+                error: false,
+                data: collection
+            })
+        })
+        .catch(function (err) {
+            res.status(500).json({
+                error: true,
+                data: {
+                    message: err.message
+                }
+            })
+        })
 };
 
-
-
-
-
 exports.create_a_log= function(req, res) {
-    var new_log= new Task(req.body);
-    new_log.save(function(err, log) {
-        if (err)
-            res.send(err);
-        res.json(log);
-
-    });
+    var new_log = new Log(req.body);
+        pg('appLogs').insert({name:req.body.name})
+            .then(function(id){
+                res.json({
+                    error:false,
+                    id: id
+                })
+            })
+            .catch(function(err){
+                res.json({
+                    error:true,
+                    data:{
+                        message:err.message
+                    }
+                })
+            })
 };
 
 
 
 exports.read_a_log= function(req, res) {
-    Log.findById(req.params.appId, function(err, log) {
+    findById(req.params.appId, function(err, log) {
         if (err)
             res.send(err);
         res.json(log);
-
     });
 };
 
 
 
 exports.update_a_log= function(req, res) {
-    Log.findOneAndUpdate({_id: req.params.taskId}, req.body, {new: true}, function(err, task) {
+    findOneAndUpdate({_id: req.params.appId}, req.body, {new: true}, function(err, log) {
         if (err)
             res.send(err);
-        res.json(task);
+        res.json(log);
     });
 };
 
 
 exports.delete_a_log= function(req, res) {
-
-
-    Log.remove({
-        _id: req.params.taskId
-    }, function(err, task) {
+    remove({
+        _id: req.params.appId
+    }, function(err, log) {
         if (err)
-            res.send(err);
-        res.json({ message: 'Task successfully deleted' });
+            res.send(err, {message: 'Log does not exist'});
+        res.json({ message: 'Log successfully deleted' });
     });
 };
