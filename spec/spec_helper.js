@@ -1,5 +1,6 @@
-var JasmineAsync = require('jasmine-async-suite');
-var React = require('react');
+import stringifier from 'stringifier';
+import React from 'react';
+import JasmineAsync from 'jasmine-async-suite';
 
 JasmineAsync.install();
 jasmine.pp = function(obj) {

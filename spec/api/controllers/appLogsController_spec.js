@@ -39,14 +39,10 @@ describe('appLogsController', () => {
         };
     });
     describe('#validate', () => {
-        let req: express$Request, nextSpy;
+        let req, nextSpy;
 
         beforeEach(() => {
-            req = ({logger, query}
-        :
-            express$Request
-        )
-            ;
+            req = ({logger, query});
             res = jasmine.createSpyObj('response', ['status', 'send']);
             res.status.and.returnValue(res);
             nextSpy = jasmine.createSpy('next');
@@ -57,34 +53,33 @@ describe('appLogsController', () => {
 
 
     describe('#get', () => {
-        let job, stream, result;
+        let stream, result;
         beforeEach(() => {
             const query = {appGuid, startTime, endTime};
             result = [];
-            req = ({params: {type}, query, logger}:express$Request);
+            req = ({params: {appId}, query, logger});
             res = sink(data => result.push(data));
             res.type = jasmine.createSpy('type');
             res.status = jasmine.createSpy('status').and.returnValue(res);
             res.send = jasmine.createSpy('send');
-            job = {type, query};
         });
 
         afterEach(() => {
             stream.destroy();
         });
     });
+    console.log('Request:\n', req, '\nResponse:\n', res);
     describe('when the stream does not have an error', () => {
         beforeEach.async(async () => {
-            var stream = fromArray(['aaa', 'bbb', 'ccc']);
-            spyOn(returnValue(stream));
+            spyOn(subject, 'list_all_logs');
             await subject.list_all_logs(req, res);
         });
+
         it('streams the response', () => {
-            expect(res.type).toHaveBeenCalledWith('text');
+            expect(subject.list_all_logs).toHaveBeenCalledWith(req);
+            expect(res.type).toHaveBeenCalledWith('json');
             expect(result).toEqual(['aaa', 'bbb', 'ccc']);
         });
-
-        console.log('Request:\n', req, '\nResponse\n', res);
     });
 
 });
