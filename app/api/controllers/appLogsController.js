@@ -43,11 +43,27 @@ exports.create_a_log= function(req, res) {
 
 
 exports.read_a_log= function(req, res) {
-    findById(req.params.appId, function(err, log) {
-        if (err)
-            res.send(err);
-        res.json(log);
-    });
+    pg.select().table('applogs').where('appid',req.params.appId )
+        .then(function (collection) {
+            if (collection.length == 0) {
+                res.json({
+                    error: false,
+                    date:'AppId does not exist'
+                    })
+            }
+            res.json({
+                error: false,
+                data: collection
+            })
+        })
+        .catch(function (err) {
+            res.status(500).json({
+                error: true,
+                data: {
+                    message: err.message
+                }
+            })
+        })
 };
 
 
