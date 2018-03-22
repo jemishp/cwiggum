@@ -4,7 +4,7 @@ import pg from '../../server/knex';
 
 exports.list_all_logs = function(req, res) {
     var log = {log: ''};
-    pg.select().table('appLogs')
+    pg.select().table('applogs')
         .then(function (collection) {
             res.json({
                 error: false,

@@ -14,13 +14,11 @@ const globals = {
 Object.assign(global, globals);
 
 beforeAll(() => {
-    console.log('************ In the spec_helper in /spec/');
-    delete require.cache[require.resolve('../src/lib/config')];
+    console.log('************ In the spec_helper in ./app/spec/');
 });
 
 afterAll(() => {
     Object.keys(globals).forEach(key => delete global[key]);
     delete require.cache[require.resolve(__filename)];
-    delete require.cache[require.resolve('../src/lib/config')];
     JasmineAsync.uninstall();
 });

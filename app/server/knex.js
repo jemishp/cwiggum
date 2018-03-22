@@ -3,9 +3,9 @@ var pg = require('knex')({
     version: '10',
     connection: {
         host : '127.0.0.1',
-        user : 'postgres',
+        user : 'admin',
         password : 'password',
-        database : 'appLogs',
+        database : 'cwiggum',
         charset: 'utf8',
         port: 5432,
         timezone: 'UTC',

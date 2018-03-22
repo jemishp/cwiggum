@@ -6,7 +6,8 @@ const {processEnv} = require('gulp-process-env')();
 gulp.task('spec-unit', done => runSequence('spec-app', done));
 
 gulp.task('spec-app', () =>{
-    gulp.src('app/spec/app/controllers/App.js', { allowEmpty: false})
+    // gulp.src('app/spec/app/controllers/App.js', { allowEmpty: false})
+    gulp.src('spec/**/**/*_spec.js', { allowEmpty: false})
         .pipe(jasmine({includeStackTrace: true}))
 });
 

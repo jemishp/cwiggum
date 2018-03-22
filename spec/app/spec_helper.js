@@ -13,7 +13,7 @@ beforeAll(() => {
 });
 
 beforeEach(() => {
-    console.log('************* in the spec_helper beforeeach in /spec/app/');
+    console.log('************* in the spec_helper beforeeach in ./app/spec/app/');
     $('body').find('#root').remove().end().append('<div id="root"/>');
 
     Cursor.async = false;

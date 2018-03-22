@@ -1,5 +1,5 @@
 
-var appLogsSchema = ({
+var appLogsSchema =     ({
     appId:{
       type: String,
       required: 'app_id'
