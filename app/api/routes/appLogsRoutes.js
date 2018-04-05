@@ -8,7 +8,5 @@ module.exports = function(app) {
 
 
     app.route('/applogs/:appId')
-        .get(appLogs.read_a_log)
-        .put(appLogs.update_a_log)
-        .delete(appLogs.delete_a_log);
+        .get(appLogs.read_a_log);
 };

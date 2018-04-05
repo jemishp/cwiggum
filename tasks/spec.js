@@ -1,15 +1,19 @@
 import gulp from 'gulp';
 import runSequence from 'run-sequence';
+import run from 'gulp-run-command';
 import jasmine from 'gulp-jasmine';
 const {processEnv} = require('gulp-process-env')();
 
 gulp.task('spec-unit', done => runSequence('spec-app', done));
 
-gulp.task('spec-app', () =>{
-    // gulp.src('app/spec/app/controllers/App.js', { allowEmpty: false})
+gulp.task('spec-app', ['docker-up'],() =>{
     gulp.src('spec/**/**/*_spec.js', { allowEmpty: false})
         .pipe(jasmine({includeStackTrace: true}))
 });
+
+gulp.task('docker-down', run('docker-compose -f resources/docker-compose.yml -p cwiggum stop'));
+gulp.task('docker-rm', run('docker-compose -f resources/docker-compose.yml -p cwiggum rm'));
+gulp.task('docker-up', run('docker-compose -f resources/docker-compose.yml -p cwiggum up -d'));
 
 gulp.task('spec-queries', ['set-env', 'wait-for-database'], () => {
     const env = processEnv({NODE_ENV: 'test'});
