@@ -12,7 +12,7 @@ gulp.task('spec-app', ['docker-up'],() =>{
 });
 
 gulp.task('docker-down', run('docker-compose -f resources/docker-compose.yml -p cwiggum stop'));
-gulp.task('docker-rm', run('docker-compose -f resources/docker-compose.yml -p cwiggum rm'));
+gulp.task('docker-rm', ['docker-down'],run('docker-compose -f resources/docker-compose.yml -p cwiggum rm -f'));
 gulp.task('docker-up', run('docker-compose -f resources/docker-compose.yml -p cwiggum up -d'));
 
 gulp.task('spec-queries', ['set-env', 'wait-for-database'], () => {
